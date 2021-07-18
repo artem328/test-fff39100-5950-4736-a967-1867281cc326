@@ -24,6 +24,11 @@ class TransactionView
     private string $wallet;
 
     /**
+     * @OA\Property(type="string", example="Commision fee", description="Nullable. Description of the transaction")
+     */
+    private ?string $description = null;
+
+    /**
      * @OA\Property(type="string", example="2020-02-16T14:30:00+00:00", description="Transaction creation timestamp")
      */
     private string $createdAt;
@@ -56,6 +61,16 @@ class TransactionView
     public function setWallet(string $wallet): void
     {
         $this->wallet = $wallet;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getCreatedAt(): string

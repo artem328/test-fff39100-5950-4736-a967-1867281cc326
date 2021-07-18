@@ -24,12 +24,10 @@ final class TransactionViewFactory
 
         $this->fillCommonViewData($view, $transaction);
 
-        $view->setDescription($transaction->getDescription());
-
         $inverseTransaction = $transaction->getInverseTransaction();
 
         if (null !== $inverseTransaction) {
-            $view->setReceivingWallet($inverseTransaction->getWallet()->getId()->toString());
+            $view->setRelatedWallet($inverseTransaction->getWallet()->getId()->toString());
         }
 
         return $view;
@@ -49,5 +47,6 @@ final class TransactionViewFactory
         $view->setAmount($transaction->getAmount());
         $view->setWallet($transaction->getWallet()->getId()->toString());
         $view->setCreatedAt($transaction->getCreatedAt()->format(\DateTimeInterface::ATOM));
+        $view->setDescription($transaction->getDescription());
     }
 }

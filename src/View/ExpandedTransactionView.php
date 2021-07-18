@@ -12,32 +12,17 @@ use OpenApi\Annotations as OA;
  */
 final class ExpandedTransactionView extends TransactionView {
     /**
-     * @OA\Property(type="string", example="050eac74-e549-4db1-9ae1-bd83a8827d13", description="Nullable. Receiving wallet ID, in case transaction was a transfer.")
+     * @OA\Property(type="string", example="050eac74-e549-4db1-9ae1-bd83a8827d13", description="Nullable. Receiving/sending wallet ID, in case transaction was a transfer.")
      */
-    private ?string $receivingWallet = null;
+    private ?string $relatedWallet = null;
 
-    /**
-     * @OA\Property(type="string", example="Commision fee", description="Nullable. Description of the transaction")
-     */
-    private ?string $description = null;
-
-    public function getReceivingWallet(): ?string
+    public function getRelatedWallet(): ?string
     {
-        return $this->receivingWallet;
+        return $this->relatedWallet;
     }
 
-    public function setReceivingWallet(?string $receivingWallet): void
+    public function setRelatedWallet(?string $relatedWallet): void
     {
-        $this->receivingWallet = $receivingWallet;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): void
-    {
-        $this->description = $description;
+        $this->relatedWallet = $relatedWallet;
     }
 }

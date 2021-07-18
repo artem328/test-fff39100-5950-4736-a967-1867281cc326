@@ -29,4 +29,15 @@ final class TransactionRepository extends ServiceEntityRepository implements Tra
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function saveBatch(Transaction $first, Transaction ...$transactions): void
+    {
+        \array_unshift($transactions, $first);
+
+        foreach ($transactions as $transaction) {
+            $this->getEntityManager()->persist($transactions);
+        }
+
+        $this->getEntityManager()->flush();
+    }
 }
