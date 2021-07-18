@@ -20,7 +20,8 @@ else
     ${COMMAND}
 fi
 
-
 chown -R www-data var/ vendor/
+
+bin/console doctrine:migrations:migrate --no-interaction
 
 php-fpm

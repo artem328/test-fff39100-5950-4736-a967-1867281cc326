@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Api\View;
 use App\Entity\Wallet;
 use App\Form\Type\CreateTransferRequestType;
 use App\Repository\TransactionRepositoryInterface;
@@ -20,6 +21,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -86,7 +88,7 @@ final class WalletController
         FormFactoryInterface $formFactory,
         TransferProcessorInterface $transferProcessor,
         TransactionViewFactory $transactionViewFactory
-    ): ExpandedTransactionView {
+    ): View {
         $createTransferRequest = new CreateTransferRequest($wallet);
 
         $form = $formFactory->create(CreateTransferRequestType::class, $createTransferRequest);
@@ -102,6 +104,6 @@ final class WalletController
             throw new BadRequestHttpException($e->getMessage(), $e);
         }
 
-        return $transactionViewFactory->createSingleExpanded($transaction);
+        return new View($transactionViewFactory->createSingleExpanded($transaction), Response::HTTP_CREATED);
     }
 }
