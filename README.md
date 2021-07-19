@@ -18,3 +18,4 @@ The following was done intentionally, and production should or even must be impr
 - \App\Transfer\TransferProcessor depends on Doctrine's EntityManager. Could be an abstraction over doctrine
 - \App\Transfer\TransferProcessor does not lock wallet balance when updating it. Possible data corruption if simultaneous requests update one wallet's balance.
 - I'm not a fan of forms for mapping request to DTO, but it is a simple approach.
+- Tests, codestyle tools and static analysis tools should be added
